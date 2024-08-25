@@ -1,0 +1,31 @@
+service: text-messaging-marketing-campaign
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  iamRoleStatements:
+    - Effect: "Allow"
+      Action:
+        - "sqs:SendMessage"
+        - "sqs:ReceiveMessage"
+        - "sqs:DeleteMessage"
+        - "sns:Publish"
+      Resource: "*"
+
+functions:
+  queueMessage:
+    handler: ../server/controller/messageController.queueMessage
+    events:
+      - http:
+          path: messages
+          method: post
+          cors: true
+  sendMessage:
+    handler: Controller/messageController.sendMessage
+    events:
+      # This will trigger every minute by default Alternatively, we can use a different event source 
+      # or can use startMessageProcessing() method with rate limiting 
+      - schedule: rate(1 minute) 
+
+plugins:
+  - serverless-offline
