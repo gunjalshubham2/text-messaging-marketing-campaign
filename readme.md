@@ -1,6 +1,6 @@
 #Text Messaging Marketing Campaign
 
-Description:
+#Description:
 
 This Node.js application provides a micro-service for managing text message marketing campaigns. It handles message queuing, sending, rate limiting, and error handling.
 
@@ -40,7 +40,7 @@ Deploying to AWS:
 
 Create an AWS Serverless application:
 
-serverless create --template aws-nodejs --name sms-marketing-service
+serverless create --template aws-nodejs --name text-messaging-marketing-campaign
 
 
 Deploy the application:
